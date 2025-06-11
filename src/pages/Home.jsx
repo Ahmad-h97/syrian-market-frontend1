@@ -17,7 +17,7 @@ function Home(){
 
   const handlePageChange = (newPage) => {
 
-    setIsAutoScrolling(true); 
+   
     setSearchParams({ page: newPage });
     
  
