@@ -1,0 +1,28 @@
+
+
+
+
+.houseCard:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+
+.navBtns{
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  
+}
+.navBtn{
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border: none;
+  background-color: rgb(164, 193, 215);
+  color: rgb(31, 44, 28);
+}
+
+.navBtn:disabled {
+  background-color: rgb(164, 193, 215); /* same as normal for consistency */
+  opacity: 0.5;
+  cursor: not-allowed;
+}

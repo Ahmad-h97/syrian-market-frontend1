@@ -1,0 +1,137 @@
+
+.gridContainer {
+  column-count: 2;      /* number of columns */
+  column-gap: 16px;     /* space between columns */
+  
+   
+}
+
+.gridContainer > * {
+  break-inside: avoid;  /* avoid breaking cards between columns */
+  
+}
+
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  
+  
+}
+
+
+/* Container for the whole post card */
+.postCard {
+  position: relative; 
+  background-color: #ffffff;
+  border-radius: 12px;
+   box-shadow: 0 2px 8px rgba(18, 17, 17, 0.1);
+  min-height: 180px; 
+   max-height: 70%;
+   
+ width: auto;
+
+  
+  
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  margin-bottom: 0.6rem;
+}
+
+
+
+/* Swiper wrapper */
+.swiperWrapper {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+margin-bottom: 0.5rem;
+}
+
+/* Swiper itself */
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+/* Each image inside the slide */
+.slideImage {
+  width: 100%;
+  height: auto;
+  max-height: 40vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}
+
+.detailes{
+  
+  padding: 0 0.5rem;
+}
+/* House details */
+.postCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+  color: #333;
+}
+
+.postCard p {
+  margin: 0.2rem 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.options {
+  position: absolute; 
+  top:   5px;           
+  right: 5px;
+  z-index: 10;
+  background-color: #dfd8d843;
+}
+
+.optionsBtn {
+  
+  width: 100%;
+  padding: 0.3rem 1rem;
+  background-color: #ffffff00;
+  border: none;
+  
+  font-size: 0.95rem;
+  
+  color: #464343;
+}
+
+.insideButtons{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff00;
+  
+  
+}
+.insideBtn{
+  background-color: #aeadad00;
+  border: none;
+  font-size: 0.9rem;
+  margin: 0.2rem;
+}
+
+.viewToggle{
+  background-color: #f2dcdc82;
+  border: none;
+  
+}
+
+.buttonWrapper {
+  margin: 5px 5px 0 0;
+  display: flex;
+  justify-content: flex-end;
+  
+  
+}
+
+.hr {
+  border: none;
+  border-top: 1px solid #ccc;
+ margin: 5px;
+  width: 100%;
+}

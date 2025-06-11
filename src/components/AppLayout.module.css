@@ -1,0 +1,14 @@
+.appLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.mainContent {
+   flex: 1 ;  /* This makes the content grow and shrink as needed */
+  display: flex;
+  flex-direction: column;
+
+  
+  width: 100%;     /* Ensure it takes full width */
+}

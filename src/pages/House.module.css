@@ -1,0 +1,24 @@
+
+/* Swiper wrapper */
+.swiperWrapper {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+margin-bottom: 0.5rem;
+}
+
+/* Swiper itself */
+.swiper {
+  width: 100%;
+  height: auto;
+}
+
+/* Each image inside the slide */
+.slideImage {
+  width: 100%;
+  height: auto;
+  max-height: 200vh;
+  object-fit: cover;
+  display: block;
+  border-radius: 10px;
+}

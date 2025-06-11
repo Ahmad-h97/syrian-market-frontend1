@@ -1,0 +1,87 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     padding: 1rem;
+}
+
+.title{
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+
+.field {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.button{
+    padding:0.5rem ;
+    background-color: #1832d7;
+    border: none;
+    color: rgb(254, 255, 217);
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+
+.input {
+ width: 80vw;        /* makes it fill the container */
+  max-width: 600px;    /* optional: limits the maximum width */
+  padding: 10px;
+  font-size: 1rem;
+  box-sizing: content-box;
+  border-radius: 6px;
+  border: 1.5px solid #4d4dd4; /* green border */
+  border-radius: 5px; 
+  appearance: none;
+  
+}
+
+.linkText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  text-align: center;
+  gap: 0.5rem;
+  
+}
+.pText{
+    font-size: 1.3rem;
+}
+
+.link {
+  color: #e8ecf1;
+  text-decoration: none;
+  background-color: #e40f65;
+  padding: 0.7rem;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
+.message {
+  color: red;
+  text-align: center;
+}
+.hr {
+  border: none;
+  border-top: 2px solid #ccc;
+  margin: 20px 0;
+  width: 100%;
+}
