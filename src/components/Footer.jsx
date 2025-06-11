@@ -13,7 +13,7 @@ const lastScrollY = useRef(0);
   useEffect(() => {
     const handleScroll = () => {
   const currentScrollY = window.scrollY;
- if (!isAutoScrolling) {
+
   if (currentScrollY > lastScrollY.current && showFooter && currentScrollY > 50) {
     // Scrolling down and past 30px -> hide footer
     setShowFooter(false);
@@ -21,7 +21,7 @@ const lastScrollY = useRef(0);
     // Scrolling up and footer hidden -> show footer
     setShowFooter(true);
   }
-    }
+    
 
   lastScrollY.current = currentScrollY;
 };

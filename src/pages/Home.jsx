@@ -20,18 +20,12 @@ function Home(){
     setIsAutoScrolling(true); 
     setSearchParams({ page: newPage });
     
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-    setTimeout(() => {
-    setIsAutoScrolling(false); // Reactivate footer scroll detection
-  }, 400);
+ 
   };
 
   const [totalPages, setTotalPages] = useState(1);
 
-  const [isAutoScrolling, setIsAutoScrolling] = useState(false);
+  
 
     useEffect(() => {
       

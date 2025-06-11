@@ -5,6 +5,7 @@
 
 # production build
 /build
+/dist
 
 # misc
 .DS_Store
@@ -23,3 +24,4 @@ yarn-error.log*
 # logs
 logs
 *.log
+
