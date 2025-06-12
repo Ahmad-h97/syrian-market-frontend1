@@ -8,16 +8,16 @@ import { MdOutlineViewAgenda  , MdGridView } from 'react-icons/md';
 
 export default function HouseGrid ({houses}){
 
-   const [isGrid, setIsGrid] = useState(true);
+   const [isGrid, setIsGrid] = useState(false);
 
-   const toggleLayout = () => {
+   const handleToggleLayout  = () => {
     setIsGrid(prev => !prev);
   };
 
     return(
     <div className={styles.houseContainer}>
        <div className={styles.buttonWrapper}>
-        <button className={styles.viewToggle} onClick={toggleLayout}>
+        <button className={styles.viewToggle} onClick={handleToggleLayout}>
          {isGrid ? <MdGridView size={24} /> : <MdOutlineViewAgenda   size={24} />} 
       </button>
        </div>

@@ -33,7 +33,7 @@ function Home(){
          api.get(`/houses/houses?page=${page}&limit=10`)
         .then(res =>  {
             console.log(res.data)
-            console.log("xxx")
+            
 
             setHouses(res.data.data)
               setTotalPages(res.data.totalpages);

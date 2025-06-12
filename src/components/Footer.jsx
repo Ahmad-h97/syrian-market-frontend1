@@ -34,7 +34,7 @@ const lastScrollY = useRef(0);
   return (
      <footer className={`${styles.footer} ${showFooter ? styles.show : styles.hide}`}>
       <nav className={styles['footer-nav']} aria-label="Footer navigation">
-        <FooterNavItem href="/" label="Explore" Icon={MdExplore} />
+        <FooterNavItem href="logout" label="logout" Icon={MdExplore} />
         <FooterNavItem href="/wishlists" label="Wishlists" Icon={FaHeart} />
         <FooterNavItem href="/login" label="Log in" Icon={FaSignInAlt} />
       </nav>

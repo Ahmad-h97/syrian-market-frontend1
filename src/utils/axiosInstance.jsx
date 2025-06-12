@@ -2,12 +2,12 @@ import axios from 'axios';
 import {useAuthStore} from '../store/authStore';
 
 // Create a single Axios instance
-console.log(1)
+
 const api = axios.create({
   baseURL:  import.meta.env.VITE_BACKEND_URL,
   withCredentials: true, // allows sending cookies for refresh
 });
-console.log(2)
+
 
 // REQUEST INTERCEPTOR: Add access token to every request
 api.interceptors.request.use(
@@ -23,7 +23,7 @@ api.interceptors.request.use(
   },
   (error) => Promise.reject(error)
 );
-console.log(3)
+
 // RESPONSE INTERCEPTOR: Refresh token on 401
 api.interceptors.response.use(
   (response) => response,

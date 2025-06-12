@@ -69,9 +69,9 @@ return (
         <div className={styles.field}>
           <input
             type="email"
-            name="email"
+            name="Email"
             placeholder="Email"
-            value={formData.email}
+            value={formData.Email}
             onChange={handleChange}
             className={styles.input}
             required
