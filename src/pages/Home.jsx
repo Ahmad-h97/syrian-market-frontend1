@@ -54,7 +54,7 @@ function Home(){
             
 
             setHouses(res.data.data)
-              setTotalPages(res.data.totalpages);
+              setTotalPages(res.data.totalPages);
         })
         .catch (err => {
             console.error('error fetching houses',err)

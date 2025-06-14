@@ -86,7 +86,7 @@ margin-bottom: 0.5rem;
   top:   5px;           
   right: 5px;
   z-index: 10;
-  background-color: #dfd8d843;
+  background-color: #90cae79a;
 }
 
 .optionsBtn {
@@ -166,7 +166,7 @@ margin-bottom: 0.5rem;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-.popupContent input {
+.popupContent input ,.popupContent select {
   display: block;
   width: 100%;
   margin-bottom: 10px;

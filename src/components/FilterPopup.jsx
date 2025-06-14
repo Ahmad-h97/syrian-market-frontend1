@@ -25,7 +25,8 @@ const FilterPopup = ({ onClose }) => {
       title: '',
       maxPrice: '',
       minPrice: '',
-      date: '',
+      timeAmount: "",
+      timeUnit: "",
     });
   };
 
@@ -65,13 +66,25 @@ const FilterPopup = ({ onClose }) => {
           value={localFilters.maxPrice}
           onChange={handleChange}
         />
+<input
+  type="number"
+  name="timeAmount"
+  value={localFilters.timeAmount}
+  onChange={handleChange}
+/>
 
-        <input
-          type="date"
-          name="date"
-          value={localFilters.date}
-          onChange={handleChange}
-        />
+<select
+  name="timeUnit"
+  value={localFilters.timeUnit}
+  onChange={handleChange}
+>
+  <option value="">all</option>
+  <option value="hours">Hours</option>
+  <option value="days">Days</option>
+  <option value="weeks">Weeks</option>
+  <option value="months">Months</option>
+  <option value="years">Years</option>
+</select>
 
         <div className={styles.popupButtons}>
           <button onClick={resetFilters}>Reset</button>
