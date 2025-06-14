@@ -107,15 +107,26 @@ const fileInputRef = useRef();
           </div>
 
         <div className={styles.field}>
-          <label htmlFor="title">location</label>
-          <input 
-          name="location" 
-          placeholder="Location" 
-          onChange={handleChange} 
-          className={styles.input}
-
-          required />
-          </div>
+  <label htmlFor="location">Location</label>
+  <select
+    name="location"
+    onChange={handleChange}
+    className={styles.input}
+    required
+  >
+    <option value="">Select a city</option>
+    <option value="Damascus">Damascus</option>
+    <option value="Aleppo">Aleppo</option>
+    <option value="Homs">Homs</option>
+    <option value="Latakia">Latakia</option>
+    <option value="Tartus">Tartus</option>
+    <option value="Hama">Hama</option>
+    <option value="Raqqa">Raqqa</option>
+    <option value="Deir ez-Zor">Deir ez-Zor</option>
+    <option value="Hasakah">Hasakah</option>
+    <option value="Daraa">Daraa</option>
+  </select>
+</div>
         <div className={styles.field}>
           <label htmlFor="">description</label>
           <textarea 

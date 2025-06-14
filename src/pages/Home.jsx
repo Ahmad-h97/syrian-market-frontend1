@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import HouseGrid from '../components/HouseGrid';
 import Loading from "../components/loading";
 import { useSearchParams } from 'react-router-dom';
-
+import { FilterStore } from '../store/FilterStore';  // import your filter store
 
 function Home(){
     const[houses, setHouses] = useState([]);
@@ -14,6 +14,19 @@ function Home(){
 
     const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page')) || 1;
+
+
+   const filters = FilterStore((state) => state.filters);
+
+  // Helper to build query string from filters
+  const buildQuery = (filters) => {
+    const params = new URLSearchParams();
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) params.append(key, value);
+    });
+    return params.toString();
+  };
+
 
   const handlePageChange = (newPage) => {
 
@@ -29,8 +42,13 @@ function Home(){
 
     useEffect(() => {
       
+      setIsFetching(true);
 
-         api.get(`/houses/houses?page=${page}&limit=10`)
+       const filterQuery = buildQuery(filters);
+    let url = `/houses/houses?page=${page}&limit=10`;
+    if (filterQuery) url += `&${filterQuery}`;
+
+         api.get(url)
         .then(res =>  {
             console.log(res.data)
             
@@ -44,7 +62,7 @@ function Home(){
         .finally(() => {
       setIsFetching(false);
        });
-    }, [page]);
+    }, [page,filters]);
     
 
     

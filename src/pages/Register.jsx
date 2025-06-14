@@ -3,151 +3,130 @@ import api from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import styles from "./Auth.module.css";
+import { useForm } from "react-hook-form";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-   const [message, setMessage] = useState('');
-  const [formData, setFormData] = useState({
-    username: '',
-    Email: '',
-    password: '',
-    city:''
-  });
+  const onSubmit = async (formData) => {
+    setMessage("");
 
-   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    try {
+      console.log("form data",formData)
+      const res = await api.post("/auth/register", formData);
+      setMessage(res.data.message);
+
+      if (res.data.nextStep) {
+        navigate(res.data.nextStep);
+      }
+    } catch (err) {
+      setMessage(
+        err.response?.data?.message || err.message || "Something went wrong."
+      );
+    }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-     console.log('Request data:', formData);
-  
-
-   try {
-  const res = await api.post('/auth/register', formData);
-  console.log('Success response:', res);
-  setMessage(res.data.message); // Success message from backend
-
-    if (res.data.nextStep) {
-    // redirect to verification page
-   navigate(res.data.nextStep);
-  }
-
-} catch (err) {
-   console.log(err.response?.data || err.message);
-  if (err.response && err.response.data && err.response.data.message) {
-    // Error response from backend
-    setMessage(err.response.data.message);
-  } else if (err.message) {
-    // Frontend or network error (e.g. server down)
-    setMessage(err.message);
-  } else {
-    setMessage('Something went wrong.');
-  }
-}
-  };
-
-return (
+  return (
     <div className={styles.container}>
       <h2 className={styles.title}>Register</h2>
 
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)} noValidate className={styles.form}>
         <div className={styles.field}>
           <input
             type="text"
-            name="username"
             placeholder="Username"
-            value={formData.username}
-            onChange={handleChange}
-            className={styles.input}
-            
+            {...register("username", { required: "Username is required" })}
+            className={`${styles.input} ${errors.username ? styles.invalid : ""}`}
           />
+          {errors.username && (
+            <p className={styles.error}>{errors.username.message}</p>
+          )}
         </div>
 
         <div className={styles.field}>
           <input
             type="email"
-            name="Email"
             placeholder="Email"
-            value={formData.Email}
-            onChange={handleChange}
-            className={styles.input}
-            required
+            {...register("Email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Invalid email address",
+              },
+            })}
+            className={`${styles.input} ${errors.Email ? styles.invalid : ""}`}
           />
+          {errors.Email && (
+            <p className={styles.error}>{errors.Email.message}</p>
+          )}
         </div>
 
         <div className={styles.field}>
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className={styles.input}
-            required
+             {...register("password", { 
+    required: "Password is required", 
+    minLength: {
+      value: 8,
+      message: "Password must be at least 8 characters"
+    }
+  })}
+            className={`${styles.input} ${errors.password ? styles.invalid : ""}`}
           />
+          {errors.password && (
+            <p className={styles.error}>{errors.password.message}</p>
+          )}
         </div>
 
         <div className={styles.field}>
           <select
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className={styles.input}
-            
+            {...register("city", { required: "City is required" })}
+            className={`${styles.input} ${errors.city ? styles.invalid : ""}`}
+            defaultValue=""
           >
-          <option value="" disabled>Select your city</option>
-    <option value="Damascus">Damascus</option>
-    <option value="Aleppo">Aleppo</option>
-    <option value="Homs">Homs</option>
-    <option value="Hama">Hama</option>
-    <option value="Latakia">Latakia</option>
-    <option value="Tartus">Tartus</option>
-    <option value="Raqqa">Raqqa</option>
-    <option value="Deir ez-Zor">Deir ez-Zor</option>
-    <option value="Daraa">Daraa</option>
-    <option value="Hasakah">Hasakah</option>
-    <option value="Damascus">Damascus</option>
-    <option value="Aleppo">Aleppo</option>
-    <option value="Homs">Homs</option>
-    <option value="Hama">Hama</option>
-    <option value="Latakia">Latakia</option>
-    <option value="Tartus">Tartus</option>
-    <option value="Raqqa">Raqqa</option>
-    <option value="Deir ez-Zor">Deir ez-Zor</option>
-    <option value="Daraa">Daraa</option>
-    <option value="Hasakah">Hasakah</option>
-  </select>
+            <option value="" disabled>
+              Select your City
+            </option>
+            <option value="Damascus">Damascus</option>
+            <option value="Aleppo">Aleppo</option>
+            <option value="Homs">Homs</option>
+            <option value="Hama">Hama</option>
+            <option value="Latakia">Latakia</option>
+            <option value="Tartus">Tartus</option>
+            <option value="Raqqa">Raqqa</option>
+            <option value="Deir ez-Zor">Deir ez-Zor</option>
+            <option value="Daraa">Daraa</option>
+            <option value="Hasakah">Hasakah</option>
+          </select>
+          {errors.city && <p className={styles.error}>{errors.city.message}</p>}
         </div>
 
-        <div className={styles.field}>
-          <input
-            type="tel"
-            name="phone"
-            placeholder="Phone Number"
-            value={formData.phone}
-            onChange={handleChange}
-            className={styles.input}
-          
-          />
-        </div>
-
-        <button type="submit" className={styles.button}>Sign Up</button>
+        <button type="submit" className={styles.button}>
+          Sign Up
+        </button>
       </form>
 
       {message && <p className={styles.message}>{message}</p>}
+
       <hr className={styles.hr} />
 
       <div className={styles.linkText}>
-        <p className={styles.pText}>Already have an account?{" "}</p>
-        <Link to="/login" className={styles.link}>Log in</Link>
+        <p className={styles.pText}>Already have an account? </p>
+        <Link to="/login" className={styles.link}>
+          Log in
+        </Link>
       </div>
     </div>
   );
 }
-
 
 
 

@@ -34,6 +34,7 @@ const fileInputRef = useRef();
   const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
+      
          api.get(`/houses/houses/${houseId}`)
         .then(res =>  {
              const data = res.data;
@@ -107,6 +108,7 @@ console.log(newImages)
 
     try {
       const res = await api.patch(`/houses/houses/${houseId}`, form, {
+        
       });
       setMessage(res.data.message || 'House edited successfully');
       navigate('/'); // redirect after success
@@ -158,14 +160,27 @@ console.log(newImages)
 
         <div className={styles.field}>
           <label htmlFor="location">Location</label>
-          <input 
+          <select
+          
             name="location" 
             placeholder="Location" 
             value={formData.location}
             onChange={handleChange} 
             className={styles.input}
             required 
-          />
+          >
+          <option value="">Select a city</option>
+    <option value="Damascus">Damascus</option>
+    <option value="Aleppo">Aleppo</option>
+    <option value="Homs">Homs</option>
+    <option value="Latakia">Latakia</option>
+    <option value="Tartus">Tartus</option>
+    <option value="Hama">Hama</option>
+    <option value="Raqqa">Raqqa</option>
+    <option value="Deir ez-Zor">Deir ez-Zor</option>
+    <option value="Hasakah">Hasakah</option>
+    <option value="Daraa">Daraa</option>
+  </select>
         </div>
 
         <div className={styles.field}>

@@ -31,8 +31,8 @@ function Header() {
   }, [showHeader]);
 
 
-  const user = useAuthStore((state) => state.user);
-    const isLoggedIn = !! user?.id;
+const userId = useAuthStore((state) => state.userId);
+const isLoggedIn = !!userId;
    
   return (
    <header className={styles.header}>
@@ -56,7 +56,7 @@ function Header() {
     
     <NavLink to={isLoggedIn ? "/profile" : "/login"} className={styles['profile-button']}>
           <div className={styles['profile-circle']}>
-            {isLoggedIn && user?.avatar ? (
+            {isLoggedIn && userId?.avatar ? (
               <img
                 src={user.avatar}
                 alt="User"
