@@ -20,6 +20,7 @@ const fileInputRef = useRef();
     title: '',
     price: '',
     location: '',
+    category:'',
     description: '',
   });
 
@@ -64,8 +65,10 @@ const fileInputRef = useRef();
     Object.entries(formData).forEach(([key, value]) => form.append(key, value));
 
     try {
+      
       const res = await api.post('/houses/houses', form, {
       });
+      
       setMessage(res.data.message || 'House posted successfully');
       navigate('/'); // redirect after success
     } catch (err) {
@@ -127,6 +130,25 @@ const fileInputRef = useRef();
     <option value="Daraa">Daraa</option>
   </select>
 </div>
+
+    <div className={styles.field}>
+  <label htmlFor="category">Category</label>
+  <select
+    name="category"
+    onChange={handleChange}
+    className={styles.input}
+    required
+  >
+    <option value="">Select a category</option>
+    <option value="real estate">Real Estate</option>
+    <option value="electronics">Electronics</option>
+    <option value="phones & PC">Phones & PC</option>
+    <option value="clothes">Clothes</option>
+    <option value="services">Services</option>
+    <option value="vehicles">Vehicles</option>
+  </select>
+</div>
+
         <div className={styles.field}>
           <label htmlFor="">description</label>
           <textarea 

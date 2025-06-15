@@ -10,7 +10,8 @@ export const FilterStore = create(
         maxPrice: '',
         minPrice: '',
         timeAmount: "",
-  timeUnit: "",
+        timeUnit: "",
+        interestedCategories: []
       },
 
       setFilters: (newFilters) => set({ filters: newFilters }),
@@ -28,7 +29,8 @@ export const FilterStore = create(
             maxPrice: '',
             minPrice: '',
             timeAmount: "",
-  timeUnit: "",
+            timeUnit: "",
+            interestedCategories: []
           },
         }),
     }),

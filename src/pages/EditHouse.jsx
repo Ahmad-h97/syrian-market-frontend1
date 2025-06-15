@@ -24,6 +24,7 @@ const fileInputRef = useRef();
     title: '',
     price: '',
     location: '',
+    category:'',
     description: '',
   });
 
@@ -38,7 +39,8 @@ const fileInputRef = useRef();
          api.get(`/houses/houses/${houseId}`)
         .then(res =>  {
              const data = res.data;
-            console.log(data)
+            console.log("res",data)
+            console.log("res",data.category)
             console.log("use effect is called")
 
 
@@ -46,6 +48,7 @@ const fileInputRef = useRef();
           title: data.title || '',
           price: data.price || '',
           location: data.location || '',
+          category: data.category || '',
           description: data.description || '',
         });
           setExistingUrls(data.images || []);
@@ -182,6 +185,24 @@ console.log(newImages)
     <option value="Daraa">Daraa</option>
   </select>
         </div>
+<div className={styles.field}>
+  <label htmlFor="category">Category</label>
+  <select
+    name="category"
+    onChange={handleChange}
+    value={formData.category}
+    className={styles.input}
+    required
+  >
+    <option value="">Select a category</option>
+    <option value="real estate">Real Estate</option>
+    <option value="electronics">Electronics</option>
+    <option value="phones & PC">Phones & PC</option>
+    <option value="clothes">Clothes</option>
+    <option value="services">Services</option>
+    <option value="vehicles">Vehicles</option>
+  </select>
+</div>
 
         <div className={styles.field}>
           <label htmlFor="description">Description</label>

@@ -3,8 +3,10 @@ import { useState } from 'react';
 import HouseCard from './HouseCard';
 import styles from './HouseGrid.module.css'
 import { MdOutlineViewAgenda  , MdGridView } from 'react-icons/md';
-import FilterPopup from './FilterPopup'; // We'll create this next
+import FilterPopup from './FilterPopup'; 
+import InterestsPopup from './InterstsPopup';
 import { FiFilter } from "react-icons/fi";
+import { IoIosHeartEmpty } from "react-icons/io";
 
 
 export default function HouseGrid ({houses}){
@@ -13,6 +15,11 @@ export default function HouseGrid ({houses}){
 
    const openFilter = () => setIsFilterOpen(true);
   const closeFilter = () => setIsFilterOpen(false);
+
+  const [isInterstsOpen, setIsInterstsOpen] = useState(false);
+
+   const openIntersts = () => setIsInterstsOpen(true);
+  const closeIntersts = () => setIsInterstsOpen(false);
 
    const [isGrid, setIsGrid] = useState(false);
 
@@ -24,6 +31,14 @@ export default function HouseGrid ({houses}){
     <div className={styles.houseContainer}>
       
        <div className={styles.buttonWrapper}>
+        <div>
+         <button onClick={openIntersts} className={styles.btnIntersts}> My intersts <IoIosHeartEmpty size={24} />
+</button>
+
+      {isInterstsOpen && <InterestsPopup onClose={closeIntersts} />}
+
+      </div>
+      
         <div>
          <button onClick={openFilter} className={styles.btnFilter}> Filter <FiFilter size={24} />
 </button>
