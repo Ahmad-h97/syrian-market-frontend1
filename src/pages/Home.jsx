@@ -6,8 +6,16 @@ import HouseGrid from '../components/HouseGrid';
 import Loading from "../components/loading";
 import { useSearchParams } from 'react-router-dom';
 import { FilterStore } from '../store/FilterStore';  // import your filter store
+import LoadingLogo from "../components/LoadingLogo";
+
 
 function Home(){
+
+
+  const [showLoading, setShowLoading] = useState(true);
+
+
+
     const[houses, setHouses] = useState([]);
     
    const [isFetching, setIsFetching] = useState(true);
@@ -41,6 +49,7 @@ function Home(){
   
 
     useEffect(() => {
+      setShowLoading(true);
       
       setIsFetching(true);
 
@@ -50,7 +59,7 @@ function Home(){
 
          api.get(url)
         .then(res =>  {
-            console.log(res.data)
+            console.log("res.data",res.data)
             
 
             setHouses(res.data.data)
@@ -60,7 +69,10 @@ function Home(){
             console.error('error fetching houses',err)
         })   
         .finally(() => {
-      setIsFetching(false);
+      setTimeout(() => {
+        setIsFetching(false);
+        setShowLoading(false);
+      }, 2000);
        });
     }, [page,filters]);
     
@@ -70,9 +82,10 @@ function Home(){
 
     return(
        <div>
-        {isFetching ? (
+         {showLoading ? (
+           
              <>
-               <Loading />
+               <LoadingLogo />
              </>
            ) : (
              <>

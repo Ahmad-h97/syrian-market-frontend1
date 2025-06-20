@@ -25,7 +25,8 @@
   font-size: 3rem;
    align-items: center;
    margin: 0.4rem;
-   
+   display: flex;
+   justify-content: center;
    
 }
 
@@ -37,7 +38,7 @@
   margin: 0.5rem;
 }
 
-.nav-button ,.profile-button {
+.nav-button ,.profile-button,.logo {
 
  display: flex;
   flex-direction: column;
@@ -60,6 +61,7 @@
 
 .nav-label {
   transition: opacity 0.3s ease, visibility 0.3s ease;
+  font-size: medium;
 }
 .hide {
   opacity: 0;
@@ -73,3 +75,50 @@
 
 
 
+.logoImage {
+  width: 4rem;  /* Adjust size */
+  height: auto;
+  margin-left: 5px;
+}
+
+.LogoLable {
+  display: block; /* Puts text on a new line below logo */
+  margin-top: 0.5rem; /* Space between logo and text */
+  font-size: 1.25rem; /* Adjust text size */
+  font-weight: bold;
+  color: #333; /* Text color - change as needed */
+  text-align: center; /* Centers text under logo */
+  transition: all 0.3s ease; /* Smooth hide/show animation */
+}
+
+/* When header is collapsed (if using hide effect) */
+.LogoLable.hide {
+  opacity: 0;
+  height: 0;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #eee; /* fallback background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+
+.profile-icon {
+  font-size: 20px;
+  color: #555;
+}

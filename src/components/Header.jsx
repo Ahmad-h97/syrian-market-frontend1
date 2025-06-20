@@ -30,17 +30,26 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [showHeader]);
 
-
+const user = useAuthStore((state) => state.user);
 const userId = useAuthStore((state) => state.userId);
 const isLoggedIn = !!userId;
-   
+const profileImage = user?.profileImage;  
   return (
    <header className={styles.header}>
 
  <nav className={styles['header-nav']}>
-    <NavLink to= "/" className={styles.logo}>
-      🏡
-    </NavLink>
+   <NavLink to="/" className={styles.logo}>
+  <div className={styles['logo-wrapper']}>
+    <img 
+      src="/logo.svg" 
+      alt="Home" 
+      className={styles.logoImage}
+    />
+  </div>
+  <span className={`${styles['nav-label']} ${!showHeader ? styles.hide : ''}`}>
+    السوق السوري
+  </span>
+</NavLink>
   
 
   
@@ -56,12 +65,8 @@ const isLoggedIn = !!userId;
     
     <NavLink to={isLoggedIn ? "/profile" : "/login"} className={styles['profile-button']}>
           <div className={styles['profile-circle']}>
-            {isLoggedIn && userId?.avatar ? (
-              <img
-                src={user.avatar}
-                alt="User"
-                className={styles['profile-img']}
-              />
+            {isLoggedIn && profileImage ?(
+                <img src={profileImage} alt="User" className={styles['profile-img']} />
               
             ) : (
               <FaRegUser className={styles['profile-icon']} />

@@ -1,65 +1,68 @@
-
 import { useState } from 'react';
 import HouseCard from './HouseCard';
 import styles from './HouseGrid.module.css'
-import { MdOutlineViewAgenda  , MdGridView } from 'react-icons/md';
+import { MdOutlineViewAgenda, MdGridView } from 'react-icons/md';
 import FilterPopup from './FilterPopup'; 
 import InterestsPopup from './InterstsPopup';
 import { FiFilter } from "react-icons/fi";
 import { IoIosHeartEmpty } from "react-icons/io";
 
-
-export default function HouseGrid ({houses}){
-
+export default function HouseGrid({ houses }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-   const openFilter = () => setIsFilterOpen(true);
-  const closeFilter = () => setIsFilterOpen(false);
-
   const [isInterstsOpen, setIsInterstsOpen] = useState(false);
+  const [isGrid, setIsGrid] = useState(false);
+  const [followStatus, setFollowStatus] = useState({});
 
-   const openIntersts = () => setIsInterstsOpen(true);
+  const openFilter = () => setIsFilterOpen(true);
+  const closeFilter = () => setIsFilterOpen(false);
+  const openIntersts = () => setIsInterstsOpen(true);
   const closeIntersts = () => setIsInterstsOpen(false);
 
-   const [isGrid, setIsGrid] = useState(false);
-
-   const handleToggleLayout  = () => {
+  const handleToggleLayout = () => {
     setIsGrid(prev => !prev);
   };
 
-    return(
+  const handleFollowToggle = (userId, newStatus) => {
+    setFollowStatus(prev => ({
+      ...prev,
+      [userId]: newStatus
+    }));
+  };
+ 
+
+  return (
     <div className={styles.houseContainer}>
-      
-       <div className={styles.buttonWrapper}>
+      <div className={styles.buttonWrapper}>
         <div>
-         <button onClick={openIntersts} className={styles.btnIntersts}> My intersts <IoIosHeartEmpty size={24} />
-</button>
-
-      {isInterstsOpen && <InterestsPopup onClose={closeIntersts} />}
-
-      </div>
+          <button onClick={openIntersts} className={styles.btnIntersts}>
+            My intersts <IoIosHeartEmpty size={24} />
+          </button>
+          {isInterstsOpen && <InterestsPopup onClose={closeIntersts} />}
+        </div>
       
         <div>
-         <button onClick={openFilter} className={styles.btnFilter}> Filter <FiFilter size={24} />
-</button>
-
-      {isFilterOpen && <FilterPopup onClose={closeFilter} />}
-
-      </div>
+          <button onClick={openFilter} className={styles.btnFilter}>
+            Filter <FiFilter size={24} />
+          </button>
+          {isFilterOpen && <FilterPopup onClose={closeFilter} />}
+        </div>
 
         <button className={styles.viewToggle} onClick={handleToggleLayout}>
-         {isGrid ? <MdGridView size={24} /> : <MdOutlineViewAgenda   size={24} />} 
-      </button>
-
-      
-       </div>
+          {isGrid ? <MdGridView size={24} /> : <MdOutlineViewAgenda size={24} />} 
+        </button>
+      </div>
  
-        <div className={isGrid ? styles.gridContainer : styles.listContainer}>
+      <div className={isGrid ? styles.gridContainer : styles.listContainer}>
         {houses.map(house => (
-          <HouseCard key={house.id} house={house} />
+          <HouseCard 
+            key={house.id} 
+            house={house}  
+            isFollowing={followStatus[house.postedBy.id] ?? house.isFollowing}
+            onFollowToggle={handleFollowToggle}
+            isGrid={isGrid}
+          />
         ))}
       </div>
-      
     </div>
   );
 }

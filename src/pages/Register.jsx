@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import api from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -15,12 +15,24 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (formData) => {
+  const onSubmit = async (data) => {
     setMessage("");
 
     try {
-      console.log("form data",formData)
-      const res = await api.post("/auth/register", formData);
+      const formData = new FormData();
+      formData.append("username", data.username);
+      formData.append("Email", data.Email);
+      formData.append("password", data.password);
+      formData.append("city", data.city);
+
+      if (data.profileImage && data.profileImage.length > 0) {
+        formData.append("profileImage", data.profileImage[0]);
+      }
+
+      const res = await api.post("/auth/register", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       setMessage(res.data.message);
 
       if (res.data.nextStep) {
@@ -72,13 +84,13 @@ export default function Register() {
           <input
             type="password"
             placeholder="Password"
-             {...register("password", { 
-    required: "Password is required", 
-    minLength: {
-      value: 8,
-      message: "Password must be at least 8 characters"
-    }
-  })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
+            })}
             className={`${styles.input} ${errors.password ? styles.invalid : ""}`}
           />
           {errors.password && (
@@ -109,6 +121,19 @@ export default function Register() {
           {errors.city && <p className={styles.error}>{errors.city.message}</p>}
         </div>
 
+        {/* Added file input */}
+        <div className={styles.field}>
+          <input
+            type="file"
+            accept="image/*"
+            {...register("profileImage")}
+            className={styles.input}
+          />
+          {errors.profileImage && (
+            <p className={styles.error}>{errors.profileImage.message}</p>
+          )}
+        </div>
+
         <button type="submit" className={styles.button}>
           Sign Up
         </button>
@@ -127,82 +152,3 @@ export default function Register() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-/*import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from '../services/axios'; // your configured axios instance
-
-export default function Register() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-  });
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('/api/users/register', formData);
-      navigate('/login'); // or auto-login later
-    } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
-    }
-  };
-
-  return (
-    <div className="max-w-md mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
-      {error && <p className="text-red-500 mb-2">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded"
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-          className="w-full border p-2 rounded"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
-        >
-          Register
-        </button>
-      </form>
-    </div>
-  );
-}
-*/

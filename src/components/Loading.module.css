@@ -20,3 +20,53 @@
   from { transform: translateY(0); }
   to { transform: translateY(-15px); }
 }
+
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+/* Initial positions */
+.startS,
+.startEN {
+  transform: translateX(0);
+  transition: transform 1s ease;
+}
+
+/* Animations */
+.moveRight {
+  transform: translateX(75px);
+  transition: transform 1s ease;
+}
+
+.moveLeft {
+  transform: translateX(-75px);
+  transition: transform 1s ease;
+}
+.dot {
+  
+  transform: scale(0) translateX(0); /* explicitly no translate */
+  transition:  transform 0.4s ease;
+    transform-origin: center center;
+  
+}
+
+.showDot1,
+.showDot2,
+.showDot3 {
+  
+  transform: scale(1) translateX(0); /* explicitly no translate */
+}
+
+
+.mySvg {
+  width: auto !important;
+  height: 300px !important; /* 600 * (523/2088) ≈ 150 to maintain aspect */
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
+
+}

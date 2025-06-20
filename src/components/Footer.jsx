@@ -6,8 +6,9 @@ import { useEffect, useState,useRef } from "react";
 
 function Footer() {
 
-   const [showFooter, setShowFooter] = useState(true);
- 
+  const [showFooter, setShowFooter] = useState(true);
+  
+
 const lastScrollY = useRef(0);
 
   useEffect(() => {
