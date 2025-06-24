@@ -6,12 +6,11 @@ import HouseGrid from '../components/HouseGrid';
 import Loading from "../components/loading";
 import { useSearchParams } from 'react-router-dom';
 import { FilterStore } from '../store/FilterStore';  // import your filter store
-import LoadingLogo from "../components/LoadingLogo";
 
 
 function Home(){
 
-
+ console.log(1)
   const [showLoading, setShowLoading] = useState(true);
 
 
@@ -69,11 +68,11 @@ function Home(){
             console.error('error fetching houses',err)
         })   
         .finally(() => {
-      setTimeout(() => {
+      
         setIsFetching(false);
         setShowLoading(false);
-      }, 2000);
-       });
+      });
+       
     }, [page,filters]);
     
 
@@ -85,7 +84,7 @@ function Home(){
          {showLoading ? (
            
              <>
-               <LoadingLogo />
+               <Loading />
              </>
            ) : (
              <>
