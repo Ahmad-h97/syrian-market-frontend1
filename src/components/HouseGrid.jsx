@@ -28,6 +28,7 @@ export default function HouseGrid({ houses }) {
       [userId]: newStatus
     }));
   };
+  console .log(houses)
  
 
   return (
@@ -57,7 +58,9 @@ export default function HouseGrid({ houses }) {
           <HouseCard 
             key={house.id} 
             house={house}  
-            isFollowing={followStatus[house.postedBy.id] ?? house.isFollowing}
+             {...(house.isFollowing !== undefined && {
+    isFollowing: followStatus[house.postedBy?.id] ?? house.isFollowing
+  })}
             onFollowToggle={handleFollowToggle}
             isGrid={isGrid}
           />
