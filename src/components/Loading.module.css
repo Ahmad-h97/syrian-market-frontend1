@@ -70,3 +70,16 @@
   overflow: visible;
 
 }
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mySvg {
+  max-width: 100%;
+  height: auto;
+}

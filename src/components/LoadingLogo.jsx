@@ -1,94 +1,84 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import styles from './Loading.module.css';
 
-const LoadingLogo = () => {
-  const [moveAnimate, setMoveAnimate] = useState(false);
-  const [dotsAnimate, setDotsAnimate] = useState(false);
+const LoadingLogo = ({ onComplete }) => {
+  const svgRef = useRef(null);
+  const animationComplete = useRef(false);
 
   useEffect(() => {
-    const moveTimer = setTimeout(() => setMoveAnimate(true), 1000);
-    const dotsTimer = setTimeout(() => setDotsAnimate(true), 1700);
+    if (animationComplete.current) return;
+
+    // Set initial delay (2 seconds before starting)
+    const startDelay = 1;
+    
+    // Create master timeline
+    const master = gsap.timeline({
+      delay: startDelay,
+      onComplete: () => { 
+        animationComplete.current = true;
+        // Call onComplete after 3 seconds (2s initial + 5s animation = 7s, +3s = 10s total)
+        setTimeout(() => {
+          if (onComplete) onComplete();
+        }, 3000);
+      }
+    });
+
+    // Animation timeline (duration increased to 5 seconds)
+    const morphTimeline = gsap.timeline({
+      defaults: { duration: 2, ease: "power2.inOut" } // Slightly longer duration for each step
+    });
+
+    // Morph each path to its final state
+    morphTimeline
+      .to("#s4", { attr: { d: "M370 234H273.999V213H370V234Z" } }, 0)
+      .to("#s3", { attr: { d: "M299 222C299 228.627 293.627 234 287 234H286C279.373 234 274 228.627 274 222V160C274 153.373 279.373 148 286 148H287C293.627 148 299 153.373 299 160V222Z" } }, 0)
+      .to("#s2", { attr: { d: "M382 222C382 228.627 376.627 234 370 234H369C362.373 234 357 228.627 357 222V160C357 153.373 362.373 148 369 148H370C376.627 148 382 153.373 382 160V222Z" } }, 0)
+      .to("#s1", { attr: { d: "M340 222C340 228.627 334.627 234 328 234H327C320.373 234 315 228.627 315 222V160C315 153.373 320.373 148 327 148H328C334.627 148 340 153.373 340 160V222Z" } }, 0)
+      .to("#dot3", { attr: { d: "M251.5 237C259.508 237 266 243.492 266 251.5V252.5C266 260.508 259.508 267 251.5 267C243.492 267 237 260.508 237 252.5V251.5C237 243.492 243.492 237 251.5 237Z" } }, 0)
+      .to("#dot1", { attr: { d: "M137.5 158C145.508 158 152 164.492 152 172.5V173.5C152 181.508 145.508 188 137.5 188C129.492 188 123 181.508 123 173.5V172.5C123 164.492 129.492 158 137.5 158Z" } }, 0)
+      .to("#dot2", { attr: { d: "M213.5 237C221.508 237 228 243.492 228 251.5V252.5C228 260.508 221.508 267 213.5 267C205.492 267 199 260.508 199 252.5V251.5C199 243.492 205.492 237 213.5 237Z" } }, 0)
+      .to("#n3", { attr: { d: "M195 256.5C195 262.299 190.299 267 184.5 267H89.5C83.701 267 79 262.299 79 256.5V256.5C79 250.701 83.701 246 89.5 246H184.5C190.299 246 195 250.701 195 256.5V256.5Z" } }, 0)
+      .to("#n2", { attr: { d: "M103 255C103 261.627 97.6274 267 91 267H90C83.3726 267 78 261.627 78 255V178C78 171.373 83.3726 166 90 166H91C97.6274 166 103 171.373 103 178V255Z" } }, 0)
+      .to("#n1", { attr: { d: "M195 255C195 261.627 189.627 267 183 267H182C175.373 267 170 261.627 170 255V178C170 171.373 175.373 166 182 166H183C189.627 166 195 171.373 195 178V255Z" } }, 0)
+      .to("#e2", { attr: { d: "M274 234H195V213H274V234Z" } }, 0)
+      .to("#e1", { 
+        attr: { d: "M246 222C246 228.627 240.627 234 234 234H233C226.373 234 221 228.627 221 222V160C221 153.373 226.373 148 233 148H234C240.627 148 246 153.373 246 160V222Z" },
+        fill: "white" 
+      }, 0);
+
+    // Add the morph timeline to the master timeline
+    master.add(morphTimeline);
 
     return () => {
-      clearTimeout(moveTimer);
-      clearTimeout(dotsTimer);
+      master.kill();
     };
-  }, []);
+  }, [onComplete]);
 
   return (
     <div className={styles.loadingContainer}>
       <svg
-        viewBox="0 0 3500 523"
+        ref={svgRef}
+        width="502"
+        height="406"
+        viewBox="0 0 502 406"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.mySvg}
       >
-        <g id="Group1">
-          {/* S moves right */}
-          <path
-            id="s"
-            className={moveAnimate ? styles.moveRight : styles.startS}
-            d="M1903.11 63C1914.1 63 1923 71.9047 1923 82.8887V179.111C1923 190.095 1914.1 199 1903.11 199C1903.09 199 1903.07 198.999 1903.06 198.999C1903.04 198.999 1903.02 199 1903 199H1745V112.889C1745 101.905 1753.9 93 1764.89 93C1775.87 93.0002 1784.78 101.905 1784.78 112.889V159H1814.61V97.8887C1814.61 86.9047 1823.51 78.0001 1834.5 78C1845.48 78 1854.39 86.9047 1854.39 97.8887V159H1883.22V82.8887C1883.22 71.9048 1892.13 63.0002 1903.11 63Z"
-            fill="#2DFB90"
-          />
-
-          {/* E + E2 move left */}
-          <g className={moveAnimate ? styles.moveLeft : styles.startEN}>
-            <rect
-              id="e"
-              x="1854"
-              y="199"
-              width="40"
-              height="39"
-              transform="rotate(-90 1854 199)"
-              fill="white"
-            />
-            <path
-              id="e_2"
-              d="M1834 78C1845.05 78 1854 86.9543 1854 98V199H1785V159H1814V98C1814 86.9543 1822.95 78 1834 78Z"
-              fill="white"
-            />
-          </g>
-
-          {/* N moves left */}
-          <path
-            id="n"
-            className={moveAnimate ? styles.moveLeft : styles.startEN}
-            d="M1765 77C1776.05 77 1785 85.9543 1785 97V246C1785 257.046 1776.05 266 1765 266C1764.66 266 1764.33 265.991 1764 265.975C1763.67 265.991 1763.34 266 1763 266H1646C1645.97 266 1645.94 265.998 1645.91 265.998C1645.88 265.998 1645.85 266 1645.83 266C1634.88 266 1626 257.123 1626 246.174V100.826C1626 89.8765 1634.88 81 1645.83 81C1656.78 81 1665.65 89.8766 1665.65 100.826V226H1745V97C1745 85.9543 1753.95 77 1765 77Z"
-            fill="#200404"
-          />
-
-          {/* Animated dots */}
-          <rect
-  id="dot"
-  className={`${styles.dot} ${dotsAnimate ? styles.showDot1 : ''}`}
-  x="1612"
-  y="83"
-  width="40"
-  height="40"
-  rx="19.5"
-  fill="#FF0130"
-/>
-<rect
-  id="dot_2"
-  className={`${styles.dot} ${dotsAnimate ? styles.showDot2 : ''}`}
-  x="1719"
-  y="210"
-  width="40"
-  height="40"
-  rx="19.5"
-  fill="#FF0130"
-/>
-<rect
-  id="dot_3"
-  className={`${styles.dot} ${dotsAnimate ? styles.showDot3 : ''}`}
-  x="1764"
-  y="210"
-  width="40"
-  height="40"
-  rx="19.5"
-  fill="#FF0130"
-/>
+        <g id="s logo start">
+          <path id="s4" d="M330 234H315V213H330V234Z" fill="#18D171"/>
+          <path id="s3" d="M340 222C340 228.627 334.627 234 328 234H317C310.373 234 305 228.627 305 222V147C305 140.373 310.373 135 317 135H328C334.627 135 340 140.373 340 147V222Z" fill="#18D171"/>
+          <path id="s2" d="M340 222C340 228.627 334.627 234 328 234H317C310.373 234 305 228.627 305 222V147C305 140.373 310.373 135 317 135H328C334.627 135 340 140.373 340 147V222Z" fill="#18D171"/>
+          <path id="s1" d="M340 222C340 228.627 334.627 234 328 234H317C310.373 234 305 228.627 305 222V147C305 140.373 310.373 135 317 135H328C334.627 135 340 140.373 340 147V222Z" fill="#18D171"/>
+          <path id="dot3" d="M283 186C289.627 186 295 191.373 295 198V222C295 228.627 289.627 234 283 234H272C265.373 234 260 228.627 260 222V198C260 191.373 265.373 186 272 186H283Z" fill="#F6070B"/>
+          <path id="dot2" d="M283 162C289.627 162 295 167.373 295 174V196C295 202.627 289.627 208 283 208H272C265.373 208 260 202.627 260 196V174C260 167.373 265.373 162 272 162H283Z" fill="#F6070B"/>
+          <path id="dot1" d="M283 135C289.627 135 295 140.373 295 147V171C295 177.627 289.627 183 283 183H272C265.373 183 260 177.627 260 171V147C260 140.373 265.373 135 272 135H283Z" fill="#F6070B"/>
+          <path id="n3" d="M193 255.5C193 261.299 188.299 266 182.5 266H172.5C166.701 266 162 261.299 162 255.5V255.5C162 249.701 166.701 245 172.5 245H182.5C188.299 245 193 249.701 193 255.5V255.5Z" fill="black"/>
+          <path id="n2" d="M183 135C189.627 135 195 140.373 195 147V253C195 259.627 189.627 265 183 265H172C165.373 265 160 259.627 160 253V147C160 140.373 165.373 135 172 135H183Z" fill="black"/>
+          <path id="n1" d="M183 135C189.627 135 195 140.373 195 147V253C195 259.627 189.627 265 183 265H172C165.373 265 160 259.627 160 253V147C160 140.373 165.373 135 172 135H183Z" fill="black"/>
+          <path id="e2" d="M250 234H215V213H250V234Z" fill="white"/>
+          <path id="e1" d="M238 135C244.627 135 250 140.373 250 147V253C250 259.627 244.627 265 238 265H227C220.373 265 215 259.627 215 253V147C215 140.373 220.373 135 227 135H238Z" fill="#FAFEFA"/>
         </g>
       </svg>
     </div>
