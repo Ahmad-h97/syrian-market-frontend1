@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import styles from './Header.module.css';
 import { useAuthStore } from '../store/authStore';
 import { useEffect, useState,useRef } from "react";
-
+import Logo from './Logo';
 
 function Header() {
 
@@ -39,16 +39,7 @@ const profileImage = user?.profileImage;
 
  <nav className={styles['header-nav']}>
    <NavLink to="/" className={styles.logo}>
-  <div className={styles['logo-wrapper']}>
-    <img 
-      src="/logo.svg" 
-      alt="Home" 
-      className={styles.logoImage}
-    />
-  </div>
-  <span className={`${styles['nav-label']} ${!showHeader ? styles.hide : ''}`}>
-    السوق السوري
-  </span>
+  <Logo width={70} height={70} />
 </NavLink>
   
 

@@ -12,19 +12,15 @@ function Home(){
 
  console.log(1)
   const [showLoading, setShowLoading] = useState(true);
+  const[houses, setHouses] = useState([]);
+  const [isFetching, setIsFetching] = useState(true);
 
-
-
-    const[houses, setHouses] = useState([]);
-    
-   const [isFetching, setIsFetching] = useState(true);
-
-    const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const page = parseInt(searchParams.get('page')) || 1;
 
 
    const filters = FilterStore((state) => state.filters);
-
+  const [totalPages, setTotalPages] = useState(1);
   // Helper to build query string from filters
   const buildQuery = (filters) => {
     const params = new URLSearchParams();
@@ -43,7 +39,7 @@ function Home(){
  
   };
 
-  const [totalPages, setTotalPages] = useState(1);
+  
 
   
 

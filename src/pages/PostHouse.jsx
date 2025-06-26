@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {useAuthStore} from '../store/authStore'; // ⬅ import Zustand store
 import styles from './PostHouse.module.css'
 
+
 export default function PostHouse() {
   const accessToken = useAuthStore(state => state.accessToken); // ⬅ get token
   const navigate = useNavigate();
@@ -84,6 +85,22 @@ const fileInputRef = useRef();
     }
   };
 
+  if (!accessToken) {
+  return (
+    <div className={styles.container}>
+      <p className={styles.notLoggedInMessage}>
+        You must be logged in to post a house.
+      </p>
+      <button 
+        onClick={() => navigate('/login')} 
+        className={styles.notLoggedInButton}
+        aria-label="Go to login page"
+      >
+        Go to Login
+      </button>
+    </div>
+  );
+}
   return (
     <div className={styles.container}>
      

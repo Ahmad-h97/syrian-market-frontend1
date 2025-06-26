@@ -1,24 +1,36 @@
-
-/* Swiper wrapper */
 .swiperWrapper {
-  width: 100%;
-  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
   overflow: hidden;
-margin-bottom: 0.5rem;
+ background-color: rgb(208, 208, 208);
 }
 
-/* Swiper itself */
 .swiper {
   width: 100%;
-  height: auto;
+  height: 350px;
 }
 
-/* Each image inside the slide */
 .slideImage {
   width: 100%;
-  height: auto;
-  max-height: 200vh;
+  height: 100%;
   object-fit: cover;
-  display: block;
-  border-radius: 10px;
+}
+
+.detail {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.muted {
+  color: #888;
+  font-style: italic;
+}
+.detailsContainer {
+  padding: 1rem;
+  
+  border-radius: 8px;
+  margin-top: 1rem;
+  
 }

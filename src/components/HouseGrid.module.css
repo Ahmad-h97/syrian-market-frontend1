@@ -232,3 +232,22 @@ margin-bottom: 0.5rem;
   border-radius: 4px;
   cursor: pointer;
 }
+
+.loginMessage {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #ffe2e2;
+  color: #ef3232;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ffb3b3;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  z-index: 10;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  animation: fadeOut 1s ease-in-out forwards;
+  animation-delay: 0.7s;
+}
+
+
+
