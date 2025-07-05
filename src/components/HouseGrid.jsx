@@ -4,7 +4,7 @@ import styles from './HouseGrid.module.css'
 import { MdOutlineViewAgenda, MdGridView } from 'react-icons/md';
 import FilterPopup from './FilterPopup'; 
 import InterestsPopup from './InterstsPopup';
-import { FiFilter } from "react-icons/fi";
+import { CiSearch } from "react-icons/ci";
 import { IoIosHeartEmpty } from "react-icons/io";
 
 export default function HouseGrid({ houses }) {
@@ -43,7 +43,7 @@ export default function HouseGrid({ houses }) {
       
         <div>
           <button onClick={openFilter} className={styles.btnFilter}>
-            Filter <FiFilter size={24} />
+            Search <CiSearch  size={24} />
           </button>
           {isFilterOpen && <FilterPopup onClose={closeFilter} />}
         </div>

@@ -1,76 +1,88 @@
 import { NavLink } from 'react-router-dom';
-import { FaRegUser } from 'react-icons/fa';
+import { FaRegUser, FaGripLines } from 'react-icons/fa';
 import { FiPlus } from "react-icons/fi";
 import styles from './Header.module.css';
 import { useAuthStore } from '../store/authStore';
-import { useEffect, useState,useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import Logo from './Logo';
+import NavPanel from './NavPanel';
 
 function Header() {
-
   const [showHeader, setshowHeader] = useState(true);
   const lastScrollY = useRef(0);
+  const buttonRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-  const currentScrollY = window.scrollY;
+      const currentScrollY = window.scrollY;
 
-  if (currentScrollY > lastScrollY.current && showHeader && currentScrollY > 50) {
-    // Scrolling down and past 30px -> hide footer
-    setshowHeader(false);
-  } else if (currentScrollY < lastScrollY.current && !showHeader) {
-    // Scrolling up and footer hidden -> show footer
-    setshowHeader(true);
-  }
+      if (currentScrollY > lastScrollY.current && showHeader && currentScrollY > 50) {
+        setshowHeader(false);
+      } else if (currentScrollY < lastScrollY.current && !showHeader) {
+        setshowHeader(true);
+      }
 
-  lastScrollY.current = currentScrollY;
-};
-     window.addEventListener("scroll", handleScroll);
+      lastScrollY.current = currentScrollY;
+    };
 
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [showHeader]);
 
-const user = useAuthStore((state) => state.user);
-const userId = useAuthStore((state) => state.userId);
-const isLoggedIn = !!userId;
-const profileImage = user?.profileImage;  
+  const user = useAuthStore((state) => state.user);
+  const userId = useAuthStore((state) => state.userId);
+  const isLoggedIn = !!userId;
+  const profileImage = user?.profileImage;
+
+  const togglePanel = () => setIsOpen(prev => !prev);
+
   return (
-   <header className={styles.header}>
-
- <nav className={styles['header-nav']}>
-   <NavLink to="/" className={styles.logo}>
-  <Logo width={70} height={70} />
-</NavLink>
-  
-
-  
-    <div className={styles['nav-actions']}>
-    <NavLink to="/post-house" className={styles['nav-button']}>
-      <div>
-        <FiPlus className={styles['nav-icon']} />
-      </div>
-      
-      <span className={`${styles['nav-label']} ${!showHeader ? styles.hide : ''}`}>add house</span>
-    </NavLink>
-
-    
-    <NavLink to={isLoggedIn ? "/profile" : "/login"} className={styles['profile-button']}>
-          <div className={styles['profile-circle']}>
-            {isLoggedIn && profileImage ?(
-                <img src={profileImage} alt="User" className={styles['profile-img']} />
-              
-            ) : (
-              <FaRegUser className={styles['profile-icon']} />
-            )}
-          </div>
-          <span className={`${styles['nav-label']} ${!showHeader ? styles.hide : ''}`}>
-      {isLoggedIn ? 'Profile' : 'Login'}
-    </span>
+    <header className={styles.header}>
+      <nav className={styles.headerNav}>
+        <NavLink to="/" className={styles.logo}>
+          <Logo width={70} height={70} />
         </NavLink>
-    </div>
-  </nav>
-</header>
 
+        <div className={styles.navActions}>
+          <NavLink to="/post-house" className={styles.navButton}>
+            <div>
+              <FiPlus className={styles.navIcon} />
+            </div>
+            <span className={`${styles.navLabel} ${!showHeader ? styles.hide : ''}`}>add house</span>
+          </NavLink>
+
+          <button
+            ref={buttonRef}
+            onClick={togglePanel}
+            className={styles.navButton}
+          >
+            <div>
+              {isLoggedIn ? (
+                profileImage ? (
+                  <div className={styles.profileCircle}>
+                    <img
+                      src={profileImage}
+                      alt="User"
+                      className={styles.profileImg}
+                    />
+                  </div>
+                ) : (
+                  <FaRegUser className={styles.navIcon} />
+                )
+              ) : (
+                <FaGripLines className={styles.navIcon} />
+              )}
+            </div>
+            <span className={`${styles.navLabel} ${!showHeader ? styles.hide : ''}`}>
+              {isLoggedIn ? "Profile" : "Login"}
+            </span>
+          </button>
+
+          <NavPanel isOpen={isOpen} buttonRef={buttonRef} closePanel={() => setIsOpen(false)} />
+        </div>
+      </nav>
+    </header>
   );
 }
 

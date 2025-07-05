@@ -1,42 +1,70 @@
+/* Loader colors */
+:root {
+  --dot-color: #4fa94d;
+  --loading-bg: transparent;
+}
+
+body.dark {
+  --dot-color: #88cc88;
+  --loading-bg: #121212;
+}
+
+/* Loader container */
 .dotsloader {
   display: flex;
   justify-content: center;
-  align-items: center;  
-   height: 100vh;             /* full viewport height */
-  width: 100vw;    
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
   gap: 8px;
+  background-color: var(--loading-bg);
 }
+
+/* Each dot */
 .dotsloader span {
   width: 10px;
   height: 10px;
-  background: #4fa94d;
+  background: var(--dot-color);
   border-radius: 50%;
   animation: bounce 0.6s infinite alternate;
 }
-.dotsloader span:nth-child(2) { animation-delay: 0.2s; }
-.dotsloader span:nth-child(3) { animation-delay: 0.4s; }
 
-@keyframes bounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-15px); }
+/* Staggered animation delay */
+.dotsloader span:nth-child(2) {
+  animation-delay: 0.2s;
 }
 
+.dotsloader span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
+/* Bounce animation */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-15px);
+  }
+}
+
+/* Loading container (flex centering) */
 .loadingContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 90vh;
+  background-color: var(--loading-bg);
 }
 
-/* Initial positions */
+/* Initial positions for animated letters */
 .startS,
 .startEN {
   transform: translateX(0);
   transition: transform 1s ease;
 }
 
-/* Animations */
+/* Animation moves */
 .moveRight {
   transform: translateX(75px);
   transition: transform 1s ease;
@@ -46,40 +74,38 @@
   transform: translateX(-75px);
   transition: transform 1s ease;
 }
+
+/* Dot scale and translate */
 .dot {
-  
-  transform: scale(0) translateX(0); /* explicitly no translate */
-  transition:  transform 0.4s ease;
-    transform-origin: center center;
-  
+  transform: scale(0) translateX(0);
+  transition: transform 0.4s ease;
+  transform-origin: center center;
 }
 
+/* Show dots (scale up) */
 .showDot1,
 .showDot2,
 .showDot3 {
-  
-  transform: scale(1) translateX(0); /* explicitly no translate */
+  transform: scale(1) translateX(0);
 }
 
-
+/* SVG container */
 .mySvg {
   width: auto !important;
-  height: 300px !important; /* 600 * (523/2088) ≈ 150 to maintain aspect */
+  height: 300px !important;
   display: block;
   margin: 0 auto;
   overflow: visible;
-
+  max-width: 100%;
+  height: auto;
 }
 
+/* Full screen loading container */
 .loadingContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-}
-
-.mySvg {
-  max-width: 100%;
-  height: auto;
+  background-color: var(--loading-bg);
 }

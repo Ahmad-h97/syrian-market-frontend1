@@ -63,7 +63,7 @@ export default function House() {
       )}
 
       {/* Image Slider */}
-      {house.images?.length > 0 && (
+      {house.imagesPost?.length > 0 && (
         <div className={styles.swiperWrapper}>
           <Swiper
             modules={[Navigation, Pagination]}
@@ -73,7 +73,7 @@ export default function House() {
             pagination={{ clickable: true }}
             className={styles.swiper}
           >
-            {house.images.map((img, idx) => (
+            {house.imagesPost.map((img, idx) => (
               <SwiperSlide key={idx}>
                 <img src={img} alt={`house-${idx}`} className={styles.slideImage} />
               </SwiperSlide>

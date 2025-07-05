@@ -3,6 +3,9 @@ import api from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import {useAuthStore} from '../store/authStore'; // ⬅ import Zustand store
 import styles from './PostHouse.module.css'
+import imageCompression from 'browser-image-compression';
+
+
 
 
 export default function PostHouse() {
@@ -28,7 +31,7 @@ const fileInputRef = useRef();
   const [images, setImages] = useState([]);
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-
+  
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -40,19 +43,50 @@ const fileInputRef = useRef();
     setImages(prev => prev.filter((_, i) => i !== index));
   };
 
-  const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
-    const total = images.length;
+  const handleImageChange = async (e) => {
+  const files = Array.from(e.target.files);
+  const total = images.length;
 
-    const allowed = 3 - total;
-    if (files.length > allowed) {
-      alert(`You can only upload ${allowed} more image(s).`);
-      return;
-    }
+  const allowed = 3 - total;
+  if (files.length > allowed) {
+    alert(`You can only upload ${allowed} more image(s).`);
+    return;
+  }
 
-    setImages(prev => [...prev, ...files]);
-    
-  };
+  try {
+    const compressedResults = await Promise.all(
+      files.map(async (file) => {
+        // Preview for display
+        const previewUrl = URL.createObjectURL(file);
+
+        // Ultra compressed (listing)
+        const ultra = await imageCompression(file, {
+          maxSizeMB: 0.03,
+          maxWidthOrHeight: 400,
+          useWebWorker: true,
+          initialQuality: 0.5,
+          fileType: 'image/jpeg',
+        });
+
+        // Post compressed (detail view)
+        const post = await imageCompression(file, {
+          maxSizeMB: 0.1,
+          maxWidthOrHeight: 1024,
+          useWebWorker: true,
+          initialQuality: 0.75,
+          fileType: 'image/jpeg',
+        });
+
+        return { previewUrl, ultra, post };
+      })
+    );
+
+    setImages((prev) => [...prev, ...compressedResults]);
+  } catch (err) {
+    console.error("Compression error:", err);
+  }
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,9 +94,11 @@ const fileInputRef = useRef();
 
     setLoading(true);
     const form = new FormData();
-     images.forEach((img) => {
-    form.append('images', img);
-  });
+     images.forEach((imgObj, index) => {
+  form.append('imagesUltra', imgObj.ultra, `ultra-${index}.jpg`);
+  form.append('imagesPost', imgObj.post, `post-${index}.jpg`);
+});
+
     Object.entries(formData).forEach(([key, value]) => form.append(key, value));
 
     try {
@@ -178,9 +214,9 @@ const fileInputRef = useRef();
           </div>
         
         <div className={styles.imageGrid}>
-  {images.map((file, index) => (
+  {images.map((imgObj, index) => (
     <div key={`new-${index}`} className={styles.imageItem}>
-      <img src={URL.createObjectURL(file)} alt={`Preview ${index}`} width="100" />
+      <img src={URL.createObjectURL(imgObj.post)} alt={`Preview ${index}`} width="100" />
       <button type="button" onClick={() => handleDeleteNew(index)}>Delete</button>
     </div>
   ))}

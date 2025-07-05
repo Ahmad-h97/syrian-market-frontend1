@@ -18,9 +18,9 @@ const FilterPopup = ({ onClose }) => {
 
   const resetFilters = () => {
     setLocalFilters({
+      search: '',        // ✅ reset search instead of title
       location: '',
       category: '',
-      title: '',
       maxPrice: '',
       minPrice: '',
       timeAmount: '',
@@ -33,12 +33,21 @@ const FilterPopup = ({ onClose }) => {
       <div className={styles.popupContent}>
         <h3>Filter Houses</h3>
 
+        {/* ✅ New search input */}
+        <input
+          type="text"
+          name="search"
+          placeholder="Search (title or description)"
+          value={localFilters.search}
+          onChange={handleChange}
+          className={styles.input}
+        />
+
         <select
           name="location"
           value={localFilters.location}
           onChange={handleChange}
           className={styles.input}
-          required
         >
           <option value="">Select a city</option>
           <option value="Damascus">Damascus</option>
@@ -53,14 +62,8 @@ const FilterPopup = ({ onClose }) => {
           <option value="Daraa">Daraa</option>
         </select>
 
-       
-        <input
-          type="text"
-          name="title"
-          placeholder="Title"
-          value={localFilters.title}
-          onChange={handleChange}
-        />
+        {/* ❌ Removed title input */}
+        {/* ✅ Search replaces it */}
 
         <input
           type="number"
@@ -68,6 +71,7 @@ const FilterPopup = ({ onClose }) => {
           placeholder="Min Price"
           value={localFilters.minPrice}
           onChange={handleChange}
+          className={styles.input}
         />
 
         <input
@@ -76,6 +80,7 @@ const FilterPopup = ({ onClose }) => {
           placeholder="Max Price"
           value={localFilters.maxPrice}
           onChange={handleChange}
+          className={styles.input}
         />
 
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}>
@@ -86,6 +91,7 @@ const FilterPopup = ({ onClose }) => {
               padding: '6px',
               fontSize: '0.9rem',
               border: '1px solid #ccc',
+              textAlign: 'center'
             }}
           >
             last

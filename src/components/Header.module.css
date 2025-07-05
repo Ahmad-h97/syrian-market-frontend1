@@ -1,122 +1,139 @@
+
+
+/* ====== HEADER STYLES ====== */
 .header {
-  border-bottom: 1px solid #e4dddd; /* Light gray separator */
-  transition: transform 0.3s ease;
+  border-bottom: 1px solid var(--header-text);
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   position: sticky;
   top: 0;
   z-index: 999;
-  background-color: rgb(204, 204, 204);
 }
 
-.hide {
-   display: none;
+/* Hide header by moving it up */
+.headerHide {
+  transform: translateY(-100%);
 }
 
-.show {
-  transform: translateY(0%);
+/* Show header */
+.headerShow {
+  transform: translateY(0);
 }
 
-.header-nav{
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo{
-  
-   align-items: center;
-   margin: 0.4rem;
-   display: flex;
-   justify-content: center;
-   
-}
-
-.nav-actions{
+.headerNav {
   display: flex;
   align-items: center;
-  
-  gap: 1.2rem;
-  margin: 0.5rem;
+  justify-content: space-between;
+  padding: 0 1rem;
+  height: 70px;
 }
 
-.nav-button ,.profile-button,.logo {
+.logo {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.4rem 0;
+  cursor: pointer;
+  color: var(--logo-color);
+  transition: color 0.3s ease;
+}
 
- display: flex;
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+/* Buttons in nav */
+.navButton,
+.profileButton,
+.logo {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: var(--nav-text);
   text-decoration: none;
-  color: #49495f;
-  
-  
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0.3rem 0.5rem;
+  font-family: inherit;
+  transition: color 0.3s ease;
 }
 
+.navButton:hover,
+.profileButton:hover {
+  color: var(--nav-hover);
+}
 
-
-.nav-icon,.profile-icon {
+.navIcon,
+.profileIcon {
   font-size: 2.2rem;
-  color: #324052;
+  color: var(--nav-icon);
+  transition: color 0.3s ease;
 }
 
-
-
-.nav-label {
+.navLabel {
+  font-size: 1rem;
+  margin-top: 0.15rem;
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  font-size: medium;
+  white-space: nowrap;
+  user-select: none;
 }
+
+/* Hide navLabel text with fade */
 .hide {
-  opacity: 0;
-  visibility: hidden;
+  display: none;
 }
 
+/* Profile circle for user image */
+.profileCircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--profile-circle-bg);
+}
 
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
 
-
-
-
+/* Logo image and label styling */
 .logoImage {
-  width: 4rem;  /* Adjust size */
+  width: 4rem;
   height: auto;
   margin-left: 5px;
 }
 
 .LogoLable {
-  display: block; /* Puts text on a new line below logo */
-  margin-top: 0.5rem; /* Space between logo and text */
-  font-size: 1.25rem; /* Adjust text size */
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
-  color: #333; /* Text color - change as needed */
-  text-align: center; /* Centers text under logo */
-  transition: all 0.3s ease; /* Smooth hide/show animation */
+  color: var(--label-color);
+  text-align: center;
+  transition: all 0.3s ease;
+  user-select: none;
 }
 
-/* When header is collapsed (if using hide effect) */
+/* Hide LogoLable when header is collapsed */
 .LogoLable.hide {
   opacity: 0;
   height: 0;
   margin-top: 0;
   overflow: hidden;
-}
-
-.profile-circle {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: #eee; /* fallback background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 50%;
-}
-
-.profile-icon {
-  font-size: 20px;
-  color: #555;
+  pointer-events: none;
 }

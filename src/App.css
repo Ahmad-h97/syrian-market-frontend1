@@ -4,7 +4,239 @@
   box-sizing: border-box;
 }
 
+/*applayout*/
+
+:root {
+  --main-bg: #ececec;
+  --fullpage-bg: #363852;
+}
+body.dark {
+  --main-bg: #222;
+  --fullpage-bg: #1a1a2e;
+}
+
+
+
+/*header*/
+:root {
+  --header-bg: #f1f1f1;
+  --header-text: #333;
+  --logo-color: #49495f;
+  --nav-icon: #324052;
+  --nav-text: #49495f;
+  --nav-hover: #324052;
+  --profile-circle-bg: #eee;
+  --label-color: #333;
+}
+
+body.dark {
+  --header-bg: #121212;
+  --header-text: #ddd;
+  --logo-color: #ccc;
+  --nav-icon: #d8e0ff;
+  --nav-text: #e9e9e9;
+  --nav-hover: #88aaff;
+  --profile-circle-bg: #727272;
+  --label-color: #ddd;
+}
+
+/*housegrid*/
+:root {
+  --bg-postCard: #ffffff;
+  --shadow-postCard: rgba(18, 17, 17, 0.1);
+  --text-main: #242323;
+  --text-sub: #555;
+  --bg-options: #5d94af9a;
+  --btn-text: #060606;
+  --bg-buttonWrapper: #e9e9e9;
+  --popup-bg: white;
+  --popup-border: #ccc;
+  --popup-input-bg: white;
+  --popup-input-text: black;
+  --popup-input-border: #ccc;
+  --popup-button-bg: #bbe0fb;
+
+  --header-bg: hsla(227, 33%, 74%, 0.49);
+  --header-text: #333;
+  --profile-border: #ccc;
+  --username-text: #333;
+  --follow-btn-bg: #007bff;
+  --follow-btn-text: white;
+  --login-msg-bg: #ffe2e2;
+  --login-msg-text: #ef3232;
+  --login-msg-border: #ffb3b3;
+  --login-msg-shadow: rgba(0, 0, 0, 0.15);
+}
+
+
+body.dark {
+  --bg-postCard: #6c6c6cfa;
+  --shadow-postCard: rgba(0, 0, 0, 0.7);
+  --text-main: #ffffff;
+  --text-sub: #fefefe;
+  --bg-options: #33557700;
+  --btn-text: #ffffff;
+  --bg-buttonWrapper: #636363;
+  --popup-bg: #232323;
+  --popup-border: #918f8f;
+  --popup-input-bg: #2c2c2c;
+  --popup-input-text: #ffffff;
+  --popup-input-border: #ffffff;
+  --popup-button-bg: #4c6680;
+
+  --header-bg: #d82929;
+  --header-text: #ffffff;
+  --profile-border: #ffffff;
+  --username-text: #ddd;
+  --follow-btn-bg: #044586;
+  --follow-btn-text: white;
+  --login-msg-bg: #662222;
+  --login-msg-text: #ffbbbb;
+  --login-msg-border: #aa4444;
+  --login-msg-shadow: rgba(255, 100, 100, 0.5);
+}
+
+
+/*auth model*/
+
+:root {
+  --form-bg: #ffffff;
+  --form-text: #333;
+  --input-border: #9191b9;
+  --input-border-focus: #1694e9;
+  --input-bg: #fff;
+  --input-text: #000;
+  --button-bg: #1832d7;
+  --button-text: #fefdd9;
+  --button-hover-bg: #0056b3;
+  --link-bg: #e40f65;
+  --link-text: #e8ecf1;
+  --error-text: #d06060;
+  --error-border: rgb(204, 47, 47);
+  --hr-color: #ccc;
+}
+
+body.dark {
+  --form-bg: #1e1e1e;
+  --form-text: #eee;
+  --input-border: #777;
+  --input-border-focus: #4ea8ff;
+  --input-bg: #2a2a2a;
+  --input-text: #eee;
+  --button-bg: #344baf;
+  --button-text: #fffbd7;
+  --button-hover-bg: #223a8f;
+  --link-bg: #aa2a6f;
+  --link-text: #fff;
+  --error-text: #ff9999;
+  --error-border: #cc4444;
+  --hr-color: #555;
+}
+
+
+
+
+/* post house*/
+:root {
+  --form-bg: #ffffff;
+  --form-text: #333;
+  --input-border: #4d4dd4;
+  --input-bg: #fff;
+  --input-text: #000;
+  --button-bg: #0f3ae4;
+  --button-text: #e8ecf1;
+  --submit-bg: #e40f65;
+  --image-delete-bg: red;
+  --image-delete-text: white;
+  --message-text: #c82929;
+  --not-logged-button-bg: #0f3ae4;
+}
+
+body.dark {
+  --form-bg: #1e1e1e;
+  --form-text: #eee;
+  --input-border: #8b8b8b;
+  --input-bg: #2c2c2c;
+  --input-text: #eee;
+  --button-bg: #3456f0;
+  --button-text: #fff;
+  --submit-bg: #d83c80;
+  --image-delete-bg: #aa2222;
+  --image-delete-text: white;
+  --message-text: #ff8888;
+  --not-logged-button-bg: #3456f0;
+}
+
+
+
+/* Global CSS */
+
+:root {
+  --color-text: #333;
+  --color-bg: white;
+  --color-bg-hover: #f0f0f0;
+  --color-border: #ddd;
+  --color-panel-bg: white;
+  --color-panel-text: #333;
+  --color-icon: #555;
+  --color-close-btn: #888;
+}
+
+body.dark {
+  --color-text: #ffffff;
+  --color-bg: #222;
+  --color-bg-hover: #444;
+  --color-border: #555;
+  --color-panel-bg: #222;
+  --color-panel-text: #9b8181;
+  --color-icon: #aaa;
+  --color-close-btn: #bbb;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
 html, body {
   height: 100%;
   
+}
+
+/* App.css or index.css */
+
+body {
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+body.dark {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark #root {
+  background-color: #121212;
+  color: white;
+}
+
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --header-bg: rgb(191, 211, 223);
+  --card-bg: #ffffff;
+  --border-color: #ccc;
+  /* add more as needed */
+}
+
+body.dark {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --header-bg: #1e1e1e;
+  --card-bg: #2a2a2a;
+  --border-color: #444;
 }

@@ -24,7 +24,7 @@ export default function AppLayout({ children }) {
       <main className={styles.mainContent}>
         <Outlet />
       </main>
-      <Footer />
+      
 
       {/* ✅ Overlay on top of everything */}
       {showLoading && (

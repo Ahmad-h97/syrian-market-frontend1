@@ -1,131 +1,122 @@
-.container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-     padding: 1rem;
-   min-height: 50vh;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  min-height: 50vh;
+  background-color: var(--form-bg);
+  color: var(--form-text);
 }
-.title{
-    align-self: center;
-     text-align: center;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
 
+.title {
+  align-self: center;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: var(--form-text);
 }
-.form{
+
+.form {
   width: 100%;
-height: 50vh;
-    display: flex;
-    flex-direction: column;
-    
-    gap: 0.8rem;
-    margin-bottom: 1rem;
-
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
 }
 
-.field{
-  display: flex;  
+.field {
+  display: flex;
   width: 100%;
-  
   align-items: center;
   gap: 0.2rem;
 }
 
 .field label {
- 
   font-weight: 500;
+  color: var(--form-text);
 }
 
-
 .input {
- width: 100%;        /* makes it fill the container */
-  max-width: 600px;    /* optional: limits the maximum width */
+  width: 100%;
+  max-width: 600px;
   padding: 5px;
   font-size: 1rem;
   box-sizing: content-box;
   border-radius: 6px;
-  border: 1.5px solid #4d4dd4; /* green border */
-  border-radius: 5px; 
+  border: 1.5px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--input-text);
   appearance: none;
-   align-self: self-end;
-  
+  align-self: flex-end;
 }
 
-.button{
-    color: #e8ecf1;
+.button {
+  color: var(--button-text);
   text-decoration: none;
-  background-color: #0f3ae4;
+  background-color: var(--button-bg);
   padding: 0.7rem;
   border-radius: 20px;
   border: none;
   font-size: 1rem;
 }
 
+.submit {
+  color: var(--button-text);
+  text-decoration: none;
+  background-color: var(--submit-bg);
+  padding: 0.7rem;
+  border-radius: 20px;
+  font-size: 1rem;
+}
+
 .imageGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 columns */
-  gap: 0.2rem; /* space between items */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.2rem;
 }
 
 .imageItem {
-  position: relative; /* Needed for absolute positioning inside */
+  position: relative;
 }
 
 .imageItem img {
-    width: 100%;       
+  width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-   
 }
 
-.imageItem button{
-     position: absolute;
+.imageItem button {
+  position: absolute;
   top: 8px;
   right: 8px;
-  background: red;
-  color: white;
+  background: var(--image-delete-bg);
+  color: var(--image-delete-text);
   border: none;
   border-radius: 4px;
   padding: 4px 6px;
   cursor: pointer;
   font-size: 12px;
 }
-.imagesbuttonWrapper{
+
+.imagesbuttonWrapper {
   display: flex;
   align-items: center;
   align-self: center;
   gap: 0.5rem;
-
-  
 }
 
-.submit{
-  color: #e8ecf1;
-  text-decoration: none;
-  background-color: #e40f65;
-  padding: 0.7rem;
-  border-radius: 20px;
-  font-size: 1rem;
-}
-
-
-/* Container for the message */
-
-
-/* Message text */
 .notLoggedInMessage {
   font-size: 1.25rem;
-  color: #c82929;
+  color: var(--message-text);
   margin-bottom: 1.5rem;
 }
 
-/* Button */
 .notLoggedInButton {
-  background-color: #0f3ae4;  /* green, same as your brand */
+  background-color: var(--not-logged-button-bg);
   color: white;
-  
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 6px;
@@ -134,4 +125,3 @@ height: 50vh;
   font-size: 1rem;
   user-select: none;
 }
-

@@ -1,25 +1,35 @@
-import axios from 'axios';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore'; // adjust path as needed
-import api from '../utils/axiosInstance';
+import api from '../utils/axiosInstance'; // your axios instance
+import { useAuthStore } from '../store/authStore'; // your Zustand auth store
 
-
-export default function LogoutButton() {
-  const { clearAuth } = useAuthStore();
+export default function LogoutButton({ closePanel }) {
+  const clearAuth = useAuthStore(state => state.clearAuth);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await api.post('/auth/logout', {}, {
-        withCredentials: true, // important if you're using cookies
-      });
+      // Call backend to logout (cookies/session)
+      await api.post('/auth/logout', {}, { withCredentials: true });
 
-      clearAuth();        // remove accessToken from Zustand
-      navigate('/login'); // send user to login page
+      // Clear auth data in Zustand store
+      clearAuth();
+
+      // Remove keys from localStorage to fully clear saved data
+      localStorage.removeItem('auth-storage');
+      localStorage.removeItem('filter-storage');
+      // Add other keys you want to clear here...
+
+      // Optional: close any open panel
+      if (closePanel) closePanel();
+
+      // Redirect to login page
+      navigate('/login');
     } catch (error) {
-      console.error('Logout failed', error);
+      console.error('Logout failed:', error);
+      // Optional: show error to user here
     }
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return <button onClick={handleLogout}>🚪 Logout</button>;
 }

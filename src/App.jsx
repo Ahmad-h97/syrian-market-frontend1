@@ -15,7 +15,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const EditHouse = lazy(() => import('./pages/EditHouse'));
 const House = lazy(() => import('./pages/House'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
-
+const Compress = lazy(()=> import('./pageS/compress'));
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/compress" element={<Compress />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<LogIn />} />
           <Route path="/logout" element={<LogOut />} />

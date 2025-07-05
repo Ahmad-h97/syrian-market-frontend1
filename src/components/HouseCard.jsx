@@ -75,7 +75,7 @@ export default function HouseCard({ house, isFollowing, onFollowToggle }) {
             pagination={{ clickable: true }}
             className={styles.swiper}
           >
-            {house.images.map((img, idx) => (
+            {house.imagesUltra.map((img, idx) => (
               <SwiperSlide key={idx}>
                 <img src={img} alt={`house-${idx}`} loading="lazy" className={styles.slideImage} />
               </SwiperSlide>

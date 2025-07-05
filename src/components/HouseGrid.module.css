@@ -1,14 +1,14 @@
+/* Define CSS variables for light mode */
+
+/* Styles using variables */
 
 .gridContainer {
-  column-count: 2;      /* number of columns */
-  column-gap: 16px;     /* space between columns */
-  
-   
+  column-count: 2;
+  column-gap: 16px;
 }
 
 .gridContainer > * {
-  break-inside: avoid;  /* avoid breaking cards between columns */
-  
+  break-inside: avoid;
 }
 
 .listContainer {
@@ -16,43 +16,33 @@
   flex-direction: column;
 }
 
-
 /* Container for the whole post card */
 .postCard {
-  position: relative; 
-  background-color: #ffffff;
-  border-radius: 12px;
-   box-shadow: 0 2px 8px rgba(18, 17, 17, 0.1);
-  min-height: 180px; 
-   max-height: 70%;
-   
- width: auto;
-
-  
-  
   position: relative;
+  background-color: var(--bg-postCard);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow-postCard);
+  min-height: 180px;
+  max-height: 70%;
+  width: auto;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   margin-bottom: 0.6rem;
+  color: var(--text-main);
 }
 
-
-
-/* Swiper wrapper */
 .swiperWrapper {
   width: 100%;
   border-radius: 10px;
   overflow: hidden;
-margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Swiper itself */
 .swiper {
   width: 100%;
   height: auto;
 }
 
-/* Each image inside the slide */
 .slideImage {
   width: 100%;
   height: auto;
@@ -62,83 +52,87 @@ margin-bottom: 0.5rem;
   border-radius: 10px;
 }
 
-.detailes{
-  
+.detailes {
   padding: 0 0.5rem;
 }
+
 /* House details */
 .postCard h3 {
   font-size: 1.25rem;
   margin-bottom: 0.25rem;
-  color: #333;
+  color: var(--text-main);
 }
 
 .postCard p {
   margin: 0.2rem 0;
-  color: #555;
+  color: var(--text-sub);
   font-size: 1rem;
 }
 
 .options {
-  position: absolute; 
-  top:   5px;           
+  position: absolute;
+  top: 5px;
   right: 5px;
   z-index: 10;
-  background-color: #90cae79a;
+  background-color: var(--bg-options);
 }
 
 .optionsBtn {
-  
   width: 100%;
   padding: 0.3rem 1rem;
-  background-color: #b10e0e00;
+  background-color: transparent;
   border: none;
-  
   font-size: 0.95rem;
-  
-  color: #464343;
+  color: var(--btn-text);
 }
 
-.insideButtons{
+.insideButtons {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff00;
-  
-  
+  background-color: transparent;
 }
-.insideBtn{
-  background-color: #aeadad00;
+
+.insideBtn {
+  background-color: transparent;
   border: none;
   font-size: 0.9rem;
   margin: 0.2rem;
 }
 
-.viewToggle, .btnFilter ,.btnIntersts{
-  background: none;
+.viewToggle,
+.btnFilter,
+.btnIntersts {
+  background: var(--bg-options); /* Uses a defined transparent or semi-colored bg */
   border: none;
   display: flex;
-  
   align-items: center;
-  gap: 4px;
-  
+  gap: 2px;
+  color: var(--btn-text);         /* Uses your light/dark mode text */
+  padding: 1px 2px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.viewToggle:hover,
+.btnFilter:hover,
+.btnIntersts:hover {
+  background-color: var(--bg-buttonWrapper); /* uses themed hover background */
 }
 
 .buttonWrapper {
-  
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   padding: 10px 9px;
-  background-color: #ffffff;
+  background-color: var(--bg-buttonWrapper);
   margin-bottom: 4px;
-  
-  
+  transition: background-color 0.3s ease;
 }
 
 .hr {
   border: none;
   border-top: 1px solid #ccc;
- margin: 5px;
+  margin: 5px;
   width: 100%;
 }
 
@@ -156,29 +150,33 @@ margin-bottom: 0.5rem;
 }
 
 .popupContent {
-  background-color: white;
+  background-color: var(--popup-bg);
   padding: 20px;
   border-radius: 10px;
   width: 90%;
-
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--text-main);
 }
 
-.popupContent input ,.popupContent select {
+.popupContent input,
+.popupContent select {
   display: block;
   width: 100%;
   margin-bottom: 10px;
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--popup-border);
   font-size: 0.9rem;
+  background-color: var(--popup-input-bg);
+  color: var(--popup-input-text);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .popupButtons {
   display: flex;
   justify-content: space-around;
   margin-top: 15px;
-  
 }
 
 .popupButtons button {
@@ -187,67 +185,67 @@ margin-bottom: 0.5rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.9rem;
-  background-color: #bbe0fb;
+  background-color: var(--popup-button-bg);
+  transition: background-color 0.3s ease;
 }
 
+/* Header inside grid? */
 .header {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   align-items: center;
-  gap: 10px;              /* space between image and username */
+  gap: 10px;
   padding: 5px 12px;
-  background-color: hsl(220, 100%, 97%); /* light background */
- 
-
+  background-color: var(--header-bg);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: var(--header-text);
 }
-
-
 
 .profileImage {
   width: 40px;
   height: 40px;
-  border-radius: 50%;    /* circle */
-  object-fit: cover;     /* maintain aspect ratio, cover whole circle */
-  border: 2px solid #ccc;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--profile-border);
+  transition: border-color 0.3s ease;
 }
 
 .username {
   font-weight: 600;
   font-size: 1rem;
-  color: #333;
+  color: var(--username-text);
   user-select: none;
+  transition: color 0.3s ease;
 }
 
 .followButton {
   position: absolute;
-  right: 10px;       /* distance from the right edge */
-  top: 50%;          /* halfway from the top */
-  transform: translateY(-50%); /* center vertically */
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0.5rem 1rem;
   border: none;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--follow-btn-bg);
+  color: var(--follow-btn-text);
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .loginMessage {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  background-color: #ffe2e2;
-  color: #ef3232;
+  background-color: var(--login-msg-bg);
+  color: var(--login-msg-text);
   padding: 0.4rem 0.8rem;
-  border: 1px solid #ffb3b3;
+  border: 1px solid var(--login-msg-border);
   border-radius: 8px;
   font-size: 0.85rem;
   z-index: 10;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px var(--login-msg-shadow);
   animation: fadeOut 1s ease-in-out forwards;
   animation-delay: 0.7s;
 }
-
-
-
