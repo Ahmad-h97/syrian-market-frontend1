@@ -30,4 +30,3 @@ export default function Logo({ width = 250, height = 250 }) {
     </svg>
   );
 }
-
