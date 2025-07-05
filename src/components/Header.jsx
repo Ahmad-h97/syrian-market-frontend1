@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import styles from './Header.module.css';
 import { useAuthStore } from '../store/authStore';
 import { useEffect, useState, useRef } from "react";
-import Logo from './Logo';
+import Logo from './logo';
 import NavPanel from './NavPanel';
 
 function Header() {
