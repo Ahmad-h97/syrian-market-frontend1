@@ -15,7 +15,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const EditHouse = lazy(() => import('./pages/EditHouse'));
 const House = lazy(() => import('./pages/House'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
-const Compress = lazy(()=> import('./pageS/compress'));
+const Compress = lazy(()=> import('./pages/compress'));
 
 function App() {
   return (
