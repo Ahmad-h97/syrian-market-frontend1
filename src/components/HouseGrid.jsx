@@ -54,7 +54,7 @@ export default function HouseGrid({ houses }) {
       </div>
  
       <div className={isGrid ? styles.gridContainer : styles.listContainer}>
-        {houses.map(house => (
+        {houses?.map(house => (
           <HouseCard 
             key={house.id} 
             house={house}  
